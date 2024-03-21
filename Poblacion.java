@@ -1,16 +1,16 @@
 import java.util.*;
 
-public class poblacion {
+public class Poblacion extends Experimento{
     // Atributos de la clase Poblacion
     private String nombre;
     private Date fechaInicio;
     private Date fechaFin;
     private int cantidad;
-    private luminosidad luminosidad;
+    private Luminosidad luminosidad;
     private Dosis dosisComida;
 
     // Constructor de la clase Poblacion
-    public poblacion(String nombre, int cantidad) {
+    public Poblacion(String nombre, int cantidad) {
         this.nombre = nombre;
         this.cantidad = cantidad;
         this.fechaInicio = new Date();
@@ -37,11 +37,11 @@ public class poblacion {
         this.fechaFin = fechaFin;
     }
 
-    public luminosidad getLuminosidad() {
+    public Luminosidad getLuminosidad() {
         return luminosidad;
     }
 
-    public void setLuminosidad(luminosidad luminosidad) {
+    public void setLuminosidad(Luminosidad luminosidad) {
         this.luminosidad = luminosidad;
     }
 
@@ -70,7 +70,7 @@ public class poblacion {
     public String toString() {
         return "Poblacion{" +
                 "nombre='" + nombre + '\'' +
-                ", cantidad=" + cantidad +
+                ", cantidad=" + cantidad + 
                 '}';
     }
 }
