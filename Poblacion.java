@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Poblacion extends Experimento{
+public class Poblacion{
     // Atributos de la clase Poblacion
     private String nombre;
     private Date fechaInicio;
@@ -8,13 +8,16 @@ public class Poblacion extends Experimento{
     private int cantidad;
     private Luminosidad luminosidad;
     private Dosis dosisComida;
-
+    
     // Constructor de la clase Poblacion
-    public Poblacion(String nombre, int cantidad) {
+    public Poblacion(String nombre, int cantidad, Date fechaInicio, Date fechaFin, Luminosidad luminosidad, Dosis dosisComida) {
+        super(); // Add this line to invoke the superclass constructor
         this.nombre = nombre;
         this.cantidad = cantidad;
         this.fechaInicio = new Date();
         this.fechaFin = new Date();
+        this.luminosidad = Luminosidad.BAJA;
+        this.dosisComida = dosisComida;
     }
 
     // Métodos getter y setter para los atributos
