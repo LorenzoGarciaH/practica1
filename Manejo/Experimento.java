@@ -1,3 +1,4 @@
+package Manejo;
 import java.util.*;
 public class Experimento extends Poblacion {
 
@@ -9,7 +10,6 @@ public class Experimento extends Poblacion {
         this.polaciones = new Poblacion[0];
     }
     
-    // Define the missing constructor in the Poblacion class
     public Experimento(String nombre, Date fechaInicio, Date fechaFin, double temperatura, Luminosidad luminosidad, int numBacterias, Dosis dosisComida) {
         super(nombre, numBacterias, fechaInicio, fechaFin, luminosidad, dosisComida);
         // Constructor implementation

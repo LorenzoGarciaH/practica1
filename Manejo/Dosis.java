@@ -1,3 +1,4 @@
+package Manejo;
 public class Dosis {
     private int cantidadInicial;
     private int cantidadIncrementoMax;
@@ -53,7 +54,8 @@ public class Dosis {
             if(dias<=diasIncremento){
                 comida = cantidadInicial + pendienteIncremento * dias;
             }else{
-                comida
+                comida = cantidadIncrementoMax + pendienteDecremento * (dias-diasIncremento);
+            }
         }
     }
 }
