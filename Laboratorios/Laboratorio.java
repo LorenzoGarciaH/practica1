@@ -1,8 +1,8 @@
-import java.util.ArrayList;
-import java.util.Scanner;
-import package IN_OUT;
-import package Manejo;
 package Laboratorios;
+
+import java.util.*;
+import Manejo.*;
+import IN_OUT.IN_OUT;
 
 
 public class Laboratorio {
@@ -13,41 +13,41 @@ public class Laboratorio {
     public static void main(String[] args) {
         int opcion;
         do {
-            mostrarMenu();
+            IN_OUT.mostrarMenu();
             opcion = scanner.nextInt();
             scanner.nextLine(); // Consume the newline character
 
             switch (opcion) {
                 case 1:
-                    abrirArchivo();
+                    //abrirArchivo();
                     break;
                 case 2:
-                    crearNuevoExperimento();
+                    //crearNuevoExperimento();
                     break;
                 case 3:
                      if (experimentoActual == null) {
                         System.out.println("No hay experimento actual. Crea un nuevo experimento primero.");
                         return;
                      }   
-                    crearPoblacionBacterias();
+                    //crearPoblacionBacterias();
                     break;
                 case 4:
-                    visualizarPoblacionesBacterias();
+                    //visualizarPoblaciones();
                     break;
                 case 5:
-                    borrarPoblacionBacterias();
+                    //EliminarPoblacion();
                     break;
                 case 6:
-                    verInformacionPoblacionBacterias();
+                    //verInformacionPoblaciones();
                     break;
                 case 7:
-                    guardarArchivo();
+                    //guardarArchivo();
                     break;
                 case 8:
-                    guardarComoArchivo();
+                    //guardarComoArchivo();
                     break;
                 case 9:
-                    System.out.println("Saliendo del programa...");
+                    System.out.println("Saliendo ...");
                     break;
                 default:
                     System.out.println("Opción inválida. Por favor, intenta nuevamente.");
