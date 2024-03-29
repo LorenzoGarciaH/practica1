@@ -4,20 +4,19 @@ import java.util.*;
 public class Poblacion{
     // Atributos de la clase Poblacion
     private String nombre;
+    private int cantidad;
     private Date fechaInicio;
     private Date fechaFin;
-    private int cantidad;
     private Luminosidad luminosidad;
-    private Dosis dosisComida;
+    private int dosisComida;
     
     // Constructor de la clase Poblacion
-    public Poblacion(String nombre, int cantidad, Date fechaInicio, Date fechaFin, Luminosidad luminosidad, Dosis dosisComida) {
-        super(); // Add this line to invoke the superclass constructor
+    public Poblacion(String nombre, int cantidad, Date fechaInicio, Date fechaFin, Luminosidad luminosidad, int dosisComida) {
         this.nombre = nombre;
         this.cantidad = cantidad;
-        this.fechaInicio = new Date();
-        this.fechaFin = new Date();
-        this.luminosidad = Luminosidad.BAJA;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.luminosidad = luminosidad;
         this.dosisComida = dosisComida;
     }
 
@@ -49,11 +48,11 @@ public class Poblacion{
         this.luminosidad = luminosidad;
     }
 
-    public Dosis getDosis() {
+    public int getDosis() {
         return dosisComida;
     }
 
-    public void setDosis(Dosis dosis) {
+    public void setDosis(int dosis) {
         this.dosisComida = dosis;
     }
 
@@ -74,7 +73,11 @@ public class Poblacion{
     public String toString() {
         return "Poblacion{" +
                 "nombre='" + nombre + '\'' +
-                ", cantidad=" + cantidad + 
+                ", fechaInicio=" + fechaInicio +
+                ", fechaFin=" + fechaFin +
+                ", cantidad=" + cantidad +
+                ", luminosidad=" + luminosidad +
+                ", dosisComida=" + dosisComida +
                 '}';
     }
 }

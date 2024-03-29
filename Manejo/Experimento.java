@@ -1,21 +1,24 @@
 package Manejo;
 import java.util.*;
 public class Experimento extends Poblacion {
-
-    private ArrayList<Poblacion> poblaciones = new ArrayList<>();
-
-    public Experimento(String nombre, int cantidad, Date fechaInicio, Date fechaFin, Luminosidad luminosidad, Dosis dosisComida, ArrayList polaciones) {
+    private ArrayList<Poblacion> polaciones;
+        
+    public Experimento(String nombre, int cantidad, Date fechaInicio, Date fechaFin, Luminosidad luminosidad, int dosisComida, ArrayList<Poblacion> polaciones) {
         super(nombre, cantidad, fechaInicio, fechaFin, luminosidad, dosisComida);
-       
-        this.polaciones = new Poblacion[0];
+        this.polaciones = new ArrayList<>();
     }
-    
-    public Experimento(String nombre, Date fechaInicio, Date fechaFin, double temperatura, Luminosidad luminosidad, int numBacterias, Dosis dosisComida) {
-        super(nombre, numBacterias, fechaInicio, fechaFin, luminosidad, dosisComida);
-        // Constructor implementation
+    public ArrayList<Poblacion> getPoblaciones() {
+        return polaciones;
     }
-    
-     public void agregarPoblacionBacterias(Poblacion poblacion) {
-        poblaciones.add(poblacion);
+
+    public void setPoblaciones(ArrayList<Poblacion> poblaciones) {
+        this.polaciones = poblaciones;
+    }
+
+    public void agregarPoblacion(Poblacion poblacion) {
+        polaciones.add(poblacion);
+    }
+    public void eliminarPoblacion(Poblacion poblacion) {
+        polaciones.remove(poblacion);
     }
 }
