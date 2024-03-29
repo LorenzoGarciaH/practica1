@@ -4,6 +4,8 @@ import java.util.*;
 import Manejo.*;
 import IN_OUT.IN_OUT;
 import java.io.IOException;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 
 public class Laboratorio {
@@ -27,7 +29,23 @@ public class Laboratorio {
             
             switch (opcion) {
                 case 1:
-                    //abrirArchivo();
+                    try {
+                        IN_OUT.salidaPorPantalla("Ingrese el nombre del archivo: ");
+                        String nombreArchivo = IN_OUT.entradaString("Ingrese el nombre del archivo: ");
+                        File archivo = new File(nombreArchivo);
+                        try {
+                            Scanner scanner = new Scanner(archivo);
+                            while (scanner.hasNextLine()) {
+                                String linea = scanner.nextLine();
+                                System.out.println(linea);
+                            }
+                            scanner.close();
+                        } catch (FileNotFoundException e) {
+                            System.out.println("No se encontró el archivo.");
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 case 2:
                     String nombre = null;
@@ -43,14 +61,18 @@ public class Laboratorio {
                     Luminosidad luminosidad = null;
                     String poblacionNombre = null;
                     try {
-                        IN_OUT.salidaPorPantalla("Ingrese primero los atributos de la población: ");
+                        IN_OUT.salidaPorPantalla("Ingrese primero los atributos de la población: ");//Atributos de la población
 
                         poblacionNombre = IN_OUT.entradaString("Ingrese el nombre de la población: ");
                         poblacionCantidad = IN_OUT.entradaInteger("Ingrese la cantidad de bacterias: ");
                         poblacionFechaInicio = new Date();
                         poblacionFechaFin = new Date();
-                        poblacionLuminosidad = Luminosidad.valueOf(IN_OUT.entradaString("ALTO MEDIO BAJO"));
-                        IN_OUT.salidaPorPantalla("Ingrese   ahora los atributos del experimento: ");
+                        try {
+                            poblacionLuminosidad = Luminosidad.valueOf(IN_OUT.entradaString("ALTO MEDIO BAJO").toUpperCase());
+                        } catch (IllegalArgumentException exception) {
+                            System.out.println("Valor inválido para Luminosidad. Por favor, ingrese ALTO, MEDIO o BAJO.");
+                        }
+                        IN_OUT.salidaPorPantalla("Ingrese ahora los atributos del experimento: ");//Atributos del experimento
 
                         poblacionDosisComida = IN_OUT.entradaInteger("Ingrese la dosis de comida: ");
                         nombre = IN_OUT.entradaString("Ingrese el nombre del experimento: ");
@@ -58,29 +80,100 @@ public class Laboratorio {
                         dosisComida = IN_OUT.entradaInteger("Ingrese la dosis de comida: ");
                         fechaInicio = new Date();
                         fechaFin = new Date();
-                        luminosidad = Luminosidad.valueOf(IN_OUT.entradaString("ALTO MEDIO BAJO"));
+                        try {
+                            luminosidad = Luminosidad.valueOf(IN_OUT.entradaString("ALTO MEDIO BAJO").toUpperCase());
+                        } catch (IllegalArgumentException exception) {
+                            System.out.println("Valor inválido para Luminosidad. Por favor, ingrese ALTO, MEDIO o BAJO.");
+                        }
                     } catch (IOException | IllegalArgumentException exception) {
                         exception.printStackTrace();
                     }
                     ArrayList<Poblacion> poblaciones = new ArrayList<>();
                     Poblacion poblacion = new Poblacion(poblacionNombre, poblacionCantidad, poblacionFechaInicio, poblacionFechaFin, poblacionLuminosidad, poblacionDosisComida);
-                    Experimento NuevoExperimento = new Experimento(nombre, cantidad, fechaInicio, fechaFin, luminosidad, dosisComida, poblaciones);
+                    experimentoActual = new Experimento(nombre, cantidad, fechaInicio, fechaFin, luminosidad, dosisComida, poblaciones);
+                    experimentoActual.agregarPoblacion(poblacion);
+                    experimentos.add(experimentoActual);
                     break;
                 case 3:
-                     if (experimentoActual == null) {
+                    if (experimentoActual == null) {
                         System.out.println("No hay experimento actual. Crea un nuevo experimento primero.");
                         return;
-                     }   
-                    //crearPoblacionBacterias();
+                    }   
+                    IN_OUT.salidaPorPantalla("Ingrese los atributos de la población: ");
+                    String nombrePoblacion = null;
+                    try {
+                        nombrePoblacion = IN_OUT.entradaString("Ingrese el nombre de la población: ");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    int cantidadPoblacion = 0;
+                    try {
+                        cantidadPoblacion = IN_OUT.entradaInteger("Ingrese la cantidad de bacterias: ");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    Date fechaInicioPoblacion = new Date();
+                    Date fechaFinPoblacion = new Date();
+                    Luminosidad luminosidadPoblacion = null;
+                    try {
+                        luminosidadPoblacion = Luminosidad.valueOf(IN_OUT.entradaString("ALTO MEDIO BAJO").toUpperCase());
+                    } catch (IllegalArgumentException exception) {
+                        System.out.println("Valor inválido para Luminosidad. Por favor, ingrese ALTO, MEDIO o BAJO.");
+                    } catch (IOException exception) {
+                        exception.printStackTrace();
+                    }
+                    Poblacion nuevaPoblacion = new Poblacion(nombrePoblacion, cantidadPoblacion, fechaInicioPoblacion, fechaFinPoblacion, luminosidadPoblacion, 0);
+                    experimentoActual.agregarPoblacion(nuevaPoblacion); 
                     break;
                 case 4:
-                    //visualizarPoblaciones();
+                    if (experimentoActual == null) {
+                        System.out.println("No hay experimento actual. Crea un nuevo experimento primero.");
+                        return;
+                    }
+                    for (Poblacion poblacionActual : experimentoActual.getPoblaciones()) {
+                        System.out.println(poblacionActual.getNombre());
+                    }
                     break;
                 case 5:
-                    //EliminarPoblacion();
+                    if (experimentoActual == null) {
+                        System.out.println("No hay experimento actual. Crea un nuevo experimento primero.");
+                        return;
+                    }
+                    String nombrePoblacionEliminar = null;
+                    try {
+                        nombrePoblacionEliminar = IN_OUT.entradaString("Ingrese el nombre de la población a eliminar: ");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    for (Poblacion poblacionActual : experimentoActual.getPoblaciones()) {
+                        if (poblacionActual.getNombre().equals(nombrePoblacionEliminar)) {
+                            experimentoActual.eliminarPoblacion(poblacionActual);
+                            break;
+                        }
+                    }
                     break;
                 case 6:
-                    //verInformacionPoblaciones();
+                    if (experimentoActual == null) {
+                        System.out.println("No hay experimento actual. Crea un nuevo experimento primero.");
+                        return;
+                    }
+                    String nombrePoblacionDetallada = null;
+                    try {
+                        nombrePoblacionDetallada = IN_OUT.entradaString("Ingrese el nombre de la población a visualizar: ");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    for (Poblacion poblacionActual : experimentoActual.getPoblaciones()) {
+                        if (poblacionActual.getNombre().equals(nombrePoblacionDetallada)) {
+                            System.out.println("Nombre: " + poblacionActual.getNombre());
+                            System.out.println("Cantidad: " + poblacionActual.getCantidad());
+                            System.out.println("Fecha de inicio: " + poblacionActual.getFechaInicio());
+                            System.out.println("Fecha de fin: " + poblacionActual.getFechaFin());
+                            System.out.println("Luminosidad: " + poblacionActual.getLuminosidad());
+                            System.out.println("Dosis de comida: " + poblacionActual.getDosis());
+                            break;
+                        }
+                    }
                     break;
                 case 7:
                     //guardarArchivo();
