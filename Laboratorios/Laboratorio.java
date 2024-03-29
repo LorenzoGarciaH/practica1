@@ -48,6 +48,7 @@ public class Laboratorio {
                     }
                     break;
                 case 2:
+                    //inicializar variables
                     String nombre = null;
                     int poblacionCantidad = 0;
                     Date poblacionFechaInicio = null;
@@ -60,12 +61,13 @@ public class Laboratorio {
                     Date fechaFin = null;
                     Luminosidad luminosidad = null;
                     String poblacionNombre = null;
+                    
                     try {
                         IN_OUT.salidaPorPantalla("Ingrese primero los atributos de la población: ");//Atributos de la población
 
                         poblacionNombre = IN_OUT.entradaString("Ingrese el nombre de la población: ");
                         poblacionCantidad = IN_OUT.entradaInteger("Ingrese la cantidad de bacterias: ");
-                        poblacionFechaInicio = new Date();
+                        poblacionFechaInicio = new Date();//new Date() te da la fecha actual
                         poblacionFechaFin = new Date();
                         try {
                             poblacionLuminosidad = Luminosidad.valueOf(IN_OUT.entradaString("ALTO MEDIO BAJO").toUpperCase());
@@ -95,7 +97,7 @@ public class Laboratorio {
                     experimentos.add(experimentoActual);
                     break;
                 case 3:
-                    if (experimentoActual == null) {
+                    if (experimentoActual == null) {//comprobar si hay un experimento actual
                         System.out.println("No hay experimento actual. Crea un nuevo experimento primero.");
                         return;
                     }   
@@ -130,7 +132,7 @@ public class Laboratorio {
                         System.out.println("No hay experimento actual. Crea un nuevo experimento primero.");
                         return;
                     }
-                    for (Poblacion poblacionActual : experimentoActual.getPoblaciones()) {
+                    for (Poblacion poblacionActual : experimentoActual.getPoblaciones()) {//ver todos los nombres de las poblaciones en el experimento actual
                         System.out.println(poblacionActual.getNombre());
                     }
                     break;
@@ -139,14 +141,14 @@ public class Laboratorio {
                         System.out.println("No hay experimento actual. Crea un nuevo experimento primero.");
                         return;
                     }
-                    String nombrePoblacionEliminar = null;
+                    String PoblacionAEliminar = null;
                     try {
-                        nombrePoblacionEliminar = IN_OUT.entradaString("Ingrese el nombre de la población a eliminar: ");
+                        PoblacionAEliminar = IN_OUT.entradaString("Ingrese el nombre de la población a eliminar: ");
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                     for (Poblacion poblacionActual : experimentoActual.getPoblaciones()) {
-                        if (poblacionActual.getNombre().equals(nombrePoblacionEliminar)) {
+                        if (poblacionActual.getNombre().equals(PoblacionAEliminar)) {
                             experimentoActual.eliminarPoblacion(poblacionActual);
                             break;
                         }
@@ -157,29 +159,30 @@ public class Laboratorio {
                         System.out.println("No hay experimento actual. Crea un nuevo experimento primero.");
                         return;
                     }
-                    String nombrePoblacionDetallada = null;
+                    String infoPoblacion = null;
                     try {
-                        nombrePoblacionDetallada = IN_OUT.entradaString("Ingrese el nombre de la población a visualizar: ");
+                        infoPoblacion = IN_OUT.entradaString("Ingrese el nombre de la población a visualizar: ");
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                     for (Poblacion poblacionActual : experimentoActual.getPoblaciones()) {
-                        if (poblacionActual.getNombre().equals(nombrePoblacionDetallada)) {
-                            System.out.println("Nombre: " + poblacionActual.getNombre());
-                            System.out.println("Cantidad: " + poblacionActual.getCantidad());
-                            System.out.println("Fecha de inicio: " + poblacionActual.getFechaInicio());
-                            System.out.println("Fecha de fin: " + poblacionActual.getFechaFin());
-                            System.out.println("Luminosidad: " + poblacionActual.getLuminosidad());
-                            System.out.println("Dosis de comida: " + poblacionActual.getDosis());
+                        if (poblacionActual.getNombre().equals(infoPoblacion)) {
+                            infoPoblacion.toString();//ver la informacion de la poblacion
                             break;
                         }
                     }
                     break;
                 case 7:
-                    //guardarArchivo();
+                    System.out.println("Has elegido guardar.");
+                    if(experimentoActual != null) {
+                        //CSV.GuardarCSV(experimentoActual); //No se como sacar el CSV, el metodo que utliziaba antes no me funciona
+                    }
                     break;
                 case 8:
-                    //guardarComoArchivo();
+                    System.out.println("Has elegido guardar como: ");
+                    if(experimentoActual != null) {
+                       // CSV.CrearCSV(poblacion);
+                    }
                     break;
                 case 9:
                     System.out.println("Saliendo ...");

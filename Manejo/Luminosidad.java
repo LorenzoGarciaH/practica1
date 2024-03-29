@@ -1,4 +1,4 @@
 package Manejo;
-public enum Luminosidad {
+public enum Luminosidad {//determinar que solo puede haber tres valores
     ALTA, MEDIA, BAJA;
 }
