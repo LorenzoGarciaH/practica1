@@ -16,17 +16,8 @@ public class Laboratorio {
         int opcion=0;
         do {
             IN_OUT.mostrarMenu();
-            try {
                 opcion = IN_OUT.entradaInteger("Ingrese una opción: ");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
 
-            // Handle IllegalArgumentException for Luminosidad enum
-            catch (IllegalArgumentException exception) {
-                System.out.println("Valor inválido para Luminosidad. Por favor, ingrese ALTO, MEDIO o BAJO.");
-            }
-            
             switch (opcion) {
                 case 1:
                     try {
@@ -50,11 +41,6 @@ public class Laboratorio {
                 case 2:
                     //inicializar variables
                     String nombre = null;
-                    int poblacionCantidad = 0;
-                    Date poblacionFechaInicio = null;
-                    Date poblacionFechaFin = null;
-                    Luminosidad poblacionLuminosidad = null;
-                    int poblacionDosisComida = 0;
                     int cantidad = 0;
                     int dosisComida = 0;
                     Date fechaInicio = null;
@@ -63,27 +49,16 @@ public class Laboratorio {
                     String poblacionNombre = null;
                     
                     try {
-                        IN_OUT.salidaPorPantalla("Ingrese primero los atributos de la población: ");//Atributos de la población
+                    
+                        IN_OUT.salidaPorPantalla("Ingrese los atributos del experimento:(la poblacion inicial tendra los mismos nombres que el experimento) ");//Atributos del experimento
 
-                        poblacionNombre = IN_OUT.entradaString("Ingrese el nombre de la población: ");
-                        poblacionCantidad = IN_OUT.entradaInteger("Ingrese la cantidad de bacterias: ");
-                        poblacionFechaInicio = new Date();//new Date() te da la fecha actual
-                        poblacionFechaFin = new Date();
-                        try {
-                            poblacionLuminosidad = Luminosidad.valueOf(IN_OUT.entradaString("ALTO MEDIO BAJO").toUpperCase());
-                        } catch (IllegalArgumentException exception) {
-                            System.out.println("Valor inválido para Luminosidad. Por favor, ingrese ALTO, MEDIO o BAJO.");
-                        }
-                        IN_OUT.salidaPorPantalla("Ingrese ahora los atributos del experimento: ");//Atributos del experimento
-
-                        poblacionDosisComida = IN_OUT.entradaInteger("Ingrese la dosis de comida: ");
                         nombre = IN_OUT.entradaString("Ingrese el nombre del experimento: ");
                         cantidad = IN_OUT.entradaInteger("Ingrese la cantidad de bacterias: ");
                         dosisComida = IN_OUT.entradaInteger("Ingrese la dosis de comida: ");
                         fechaInicio = new Date();
                         fechaFin = new Date();
                         try {
-                            luminosidad = Luminosidad.valueOf(IN_OUT.entradaString("ALTO MEDIO BAJO").toUpperCase());
+                            luminosidad = Luminosidad.valueOf(IN_OUT.entradaString("ALTO MEDIO BAJO"));
                         } catch (IllegalArgumentException exception) {
                             System.out.println("Valor inválido para Luminosidad. Por favor, ingrese ALTO, MEDIO o BAJO.");
                         }
@@ -91,7 +66,7 @@ public class Laboratorio {
                         exception.printStackTrace();
                     }
                     ArrayList<Poblacion> poblaciones = new ArrayList<>();
-                    Poblacion poblacion = new Poblacion(poblacionNombre, poblacionCantidad, poblacionFechaInicio, poblacionFechaFin, poblacionLuminosidad, poblacionDosisComida);
+                    Poblacion poblacion = new Poblacion(nombre, cantidad, fechaInicio, fechaFin, luminosidad, poblacionDççççosisComida);
                     experimentoActual = new Experimento(nombre, cantidad, fechaInicio, fechaFin, luminosidad, dosisComida, poblaciones);
                     experimentoActual.agregarPoblacion(poblacion);
                     experimentos.add(experimentoActual);
