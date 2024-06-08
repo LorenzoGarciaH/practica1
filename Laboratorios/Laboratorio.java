@@ -22,6 +22,8 @@ public class Laboratorio {
                 case 1:
                     try {
                         caracteres tontos;
+
+                        añadiemos a esto a ver;
                         IN_OUT.salidaPorPantalla("Ingrese el nombre del archivo: ");
                         String nombreArchivo = IN_OUT.entradaString("Ingrese el nombre del archivo: ");
                         File archivo = new File(nombreArchivo);
