@@ -21,6 +21,7 @@ public class Laboratorio {
             switch (opcion) {
                 case 1:
                     try {
+                        caracteres tontos;
                         IN_OUT.salidaPorPantalla("Ingrese el nombre del archivo: ");
                         String nombreArchivo = IN_OUT.entradaString("Ingrese el nombre del archivo: ");
                         File archivo = new File(nombreArchivo);
